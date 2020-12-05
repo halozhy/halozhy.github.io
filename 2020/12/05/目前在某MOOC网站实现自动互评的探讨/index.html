@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言每完成一次互评任务，就要牺牲掉鼠标左键的部分寿命 ❎ 懒是推动科技进步的重要原因 ✅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对于目前在某MOOC网站实现自动互评的探讨">
+<meta property="og:url" content="http://example.com/2020/12/05/%E7%9B%AE%E5%89%8D%E5%9C%A8%E6%9F%90MOOC%E7%BD%91%E7%AB%99%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%BA%92%E8%AF%84%E7%9A%84%E6%8E%A2%E8%AE%A8/index.html">
+<meta property="og:site_name" content="Halo&#39;s Blog">
+<meta property="og:description" content="前言每完成一次互评任务，就要牺牲掉鼠标左键的部分寿命 ❎ 懒是推动科技进步的重要原因 ✅">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/1HXEiSBfIOtqpDk.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/nMhSo6xtAcdPTB7.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/wIPZ53QYhr8FWvN.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/gxKrRvnp4aL968w.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/UL2wByP853Aui4q.gif">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/EtYn7e4clZapb6m.gif">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/lWjBNPdbDu9JgCw.gif">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/wIPZ53QYhr8FWvN.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/nMhSo6xtAcdPTB7.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/jFRuiabzUSo5y3K.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/8suUScPtKOf1Qed.png">
+<meta property="article:published_time" content="2020-12-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-05T08:07:41.913Z">
+<meta property="article:author" content="halozhy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/05/1HXEiSBfIOtqpDk.png">
+
+<link rel="canonical" href="http://example.com/2020/12/05/%E7%9B%AE%E5%89%8D%E5%9C%A8%E6%9F%90MOOC%E7%BD%91%E7%AB%99%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%BA%92%E8%AF%84%E7%9A%84%E6%8E%A2%E8%AE%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>对于目前在某MOOC网站实现自动互评的探讨 | Halo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Halo's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/05/%E7%9B%AE%E5%89%8D%E5%9C%A8%E6%9F%90MOOC%E7%BD%91%E7%AB%99%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%BA%92%E8%AF%84%E7%9A%84%E6%8E%A2%E8%AE%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="halozhy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Halo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对于目前在某MOOC网站实现自动互评的探讨
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-05 00:00:00 / 修改时间：16:07:41" itemprop="dateCreated datePublished" datetime="2020-12-05T00:00:00+08:00">2020-12-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><del>每完成一次互评任务，就要牺牲掉鼠标左键的部分寿命</del> ❎</p>
+<p>懒是推动科技进步的重要原因 ✅</p>
+<a id="more"></a>
+
+<p>其实有前辈已经做出了大胆的实践，但是最终还是被<a target="_blank" rel="noopener" href="https://github.com/unbyte/mooc-assistant/issues/12">BAN</a>了</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/unbyte/MoocChecker">MoocChecker</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/unbyte/mooc-assistant">mooc-assistant</a></p>
+</blockquote>
+<p>年少时只知道用，现在也可以对前辈的源代码稍做分析了。但是由于<a target="_blank" rel="noopener" href="https://github.com/unbyte/mooc-assistant">mooc-assistant</a>这个脚本是浏览器插件，所以还没太看懂，不过通过分析<a target="_blank" rel="noopener" href="https://github.com/unbyte/MoocChecker">MoocChecker</a>这个脚本可知，其实对于单个互评页面来说，就干三件事：</p>
+<ol>
+<li><p>完成对评语的填充</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.j-textarea&#x27;</span>).forEach(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">	e.value = judge</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成对分数的选择</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.s&#x27;</span>).forEach(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">	e.children[e.children.length - <span class="number">1</span>].children[<span class="number">0</span>].checked = <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后模拟点击“提交”按钮</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">&#x27;.j-submitbtn&#x27;</span>).click();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这些操作放在一个循环里面，就实现了重复操作，自动互评</p>
+<p><strong>但是，这些都已成为历史了😪</strong></p>
+<h1 id="当下的情况"><a href="#当下的情况" class="headerlink" title="当下的情况"></a>当下的情况</h1><h2 id="1-F12的不顺利"><a href="#1-F12的不顺利" class="headerlink" title="1.F12的不顺利"></a>1.F12的不顺利</h2><p>首先，网站加入了debugger pause机制</p>
+<p><img src="https://i.loli.net/2020/12/05/1HXEiSBfIOtqpDk.png" alt="image-20201205133500272.png"></p>
+<p><img src="https://i.loli.net/2020/12/05/nMhSo6xtAcdPTB7.png" alt="image-20201205133441242.png"></p>
+<p>这就是开F12之后，遇到的第一个障碍</p>
+<p><strong>解决倒也是可以解决，只不过就需要多点两下鼠标了</strong></p>
+<p><strong>（或者用Ctrl+F8、F8这两个快捷键也行）</strong></p>
+<p><img src="https://i.loli.net/2020/12/05/wIPZ53QYhr8FWvN.png" alt="image-20201205133343350.png"></p>
+<h2 id="2-脚本被检测"><a href="#2-脚本被检测" class="headerlink" title="2.脚本被检测"></a>2.脚本被检测</h2><p>如果直接把曾经的MoocChecker复制进去，网站会直接报警</p>
+<p><img src="https://i.loli.net/2020/12/05/gxKrRvnp4aL968w.png" alt="image-20201205133250729.png"></p>
+<h1 id="做出的尝试"><a href="#做出的尝试" class="headerlink" title="做出的尝试"></a>做出的尝试</h1><p><strong>2020-12-5</strong>测试如下</p>
+<p><strong>在取消了此网站的debugger pause机制之后</strong></p>
+<ol>
+<li><p>完成对评语的填充 - 🆗 有效</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.j-textarea&#x27;</span>).forEach(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">	e.value = <span class="string">&#x27;这是评语&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>GIF如下：</p>
+<p><img src="https://i.loli.net/2020/12/05/UL2wByP853Aui4q.gif" alt="GIF2.gif"></p>
+</li>
+<li><p>完成对分数的选择 - 🆗 有效</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.s&#x27;</span>).forEach(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">	e.children[e.children.length - <span class="number">1</span>].children[<span class="number">0</span>].checked = <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>GIF如下：</p>
+<p><img src="https://i.loli.net/2020/12/05/EtYn7e4clZapb6m.gif" alt="GIF3.gif"></p>
+</li>
+<li><p>模拟点击“提交”按钮 - ❎😭 无效了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">&#x27;.j-submitbtn&#x27;</span>).click();</span><br></pre></td></tr></table></figure>
+
+<p>GIF如下：</p>
+<p><img src="https://i.loli.net/2020/12/05/lWjBNPdbDu9JgCw.gif" alt="GIF.gif"></p>
+</li>
+</ol>
+<p>综上，目前只有一键满分和填充评语可以使用，而且前提是取消了断点（Deactivate Breakpoints）</p>
+<h1 id="最终方案？"><a href="#最终方案？" class="headerlink" title="最终方案？"></a>最终方案？</h1><p>这会是目前的终极解决方案吗？</p>
+<h2 id="1-打开F12调试界面"><a href="#1-打开F12调试界面" class="headerlink" title="1.打开F12调试界面"></a>1.打开F12调试界面</h2><p>这……没啥可说的吧</p>
+<h2 id="2-取消断点并继续"><a href="#2-取消断点并继续" class="headerlink" title="2.取消断点并继续"></a>2.取消断点并继续</h2><p>切换到 <code>Source</code> 标签页，依次点击以下两个按钮</p>
+<p><img src="https://i.loli.net/2020/12/05/wIPZ53QYhr8FWvN.png" alt="image-20201205133343350.png"></p>
+<p>或者先按 <code>Ctrl+F8</code> ，再按 <code>F8</code></p>
+<p>反正让这个<img src="https://i.loli.net/2020/12/05/nMhSo6xtAcdPTB7.png" alt="image-20201205133441242.png">消失即可继续</p>
+<h2 id="3-控制台注入代码"><a href="#3-控制台注入代码" class="headerlink" title="3.控制台注入代码"></a>3.控制台注入代码</h2><p>切换到 <code>Console</code> 标签页，然后把这段继承自 <a target="_blank" rel="noopener" href="https://github.com/unbyte/">unbyte </a>前辈又被我魔改后的代码粘贴进去，敲个回车</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> suckIt = <span class="string">`&lt;div style=&quot;position: fixed;top: 50%;z-index: 999;right: 10%;padding: 1em;background: rgba(233,233,233,.6);border: 1px solid #aaa;&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;textarea placeholder=&quot;评价内容&quot; id=&quot;fuckMe&quot; style=&quot;padding: 10px;height: 60px;width: 200px;margin: 10px;&quot;&gt;Good Job Bro.&lt;/textarea&gt;</span></span><br><span class="line"><span class="string">&lt;p style=&quot;text-align: center;&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;input type=&quot;text&quot; disabled id=&quot;times&quot; placeholder=&quot;份数，1 ~ 20&quot; style=&quot;width: 100px;padding: .4em;margin: 0 1em;background: #fff;border: 1px solid #999;float: left;&quot; value=&quot;1&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;input type=&quot;submit&quot; value=&quot;Fuck It Now&quot; onclick=&quot;fuckIt();&quot; style=&quot;border: 1px solid #aaa;padding: 5px;color: #999;cursor: pointer;&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;`</span>;</span><br><span class="line"><span class="built_in">document</span>.body.insertAdjacentHTML(<span class="string">&quot;afterbegin&quot;</span>, suckIt);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fuckIt</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> judge = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;fuckMe&#x27;</span>).value || <span class="string">&#x27;Good Job&#x27;</span>;</span><br><span class="line">    <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.s&#x27;</span>).forEach(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">	    e.children[e.children.length - <span class="number">1</span>].children[<span class="number">0</span>].checked = <span class="literal">true</span></span><br><span class="line">	&#125;);</span><br><span class="line">    <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.j-textarea&#x27;</span>).forEach(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">        e.value = judge</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">window</span>.scrollTo(<span class="number">0</span>,<span class="built_in">document</span>.querySelector(<span class="string">&#x27;.j-submitbtn&#x27;</span>).offsetTop)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/12/05/jFRuiabzUSo5y3K.png" alt="image-20201205155026340.png"></p>
+<h2 id="4-FuckIt-amp-Submit"><a href="#4-FuckIt-amp-Submit" class="headerlink" title="4.FuckIt &amp; Submit"></a>4.FuckIt &amp; Submit</h2><p>填写评语，不用管那个输入框里面的1，然后按下 “Fuck It Now”按钮，网页会自动跳转到底部，之后点击网页上的“提交”按钮即可</p>
+<p><img src="https://i.loli.net/2020/12/05/8suUScPtKOf1Qed.png" alt="image-20201205155250575.png"></p>
+<p>之后对于每一份作业重复进行：</p>
+<p>填写评语 -&gt; Fuck It Now -&gt; 提交</p>
+<p>的操作即可</p>
+<h1 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h1><p>所以，如何实现提交按钮的自动点击呢？</p>
+<p><del>另外，如何抓到我呢？</del></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E7%9B%97%E5%8F%B7%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%9E%90/" rel="prev" title="记一次对盗号网站的分析">
+      <i class="fa fa-chevron-left"></i> 记一次对盗号网站的分析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BD%93%E4%B8%8B%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">2.</span> <span class="nav-text">当下的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-F12%E7%9A%84%E4%B8%8D%E9%A1%BA%E5%88%A9"><span class="nav-number">2.1.</span> <span class="nav-text">1.F12的不顺利</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%84%9A%E6%9C%AC%E8%A2%AB%E6%A3%80%E6%B5%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.脚本被检测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%9A%E5%87%BA%E7%9A%84%E5%B0%9D%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">做出的尝试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">最终方案？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%89%93%E5%BC%80F12%E8%B0%83%E8%AF%95%E7%95%8C%E9%9D%A2"><span class="nav-number">4.1.</span> <span class="nav-text">1.打开F12调试界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%96%E6%B6%88%E6%96%AD%E7%82%B9%E5%B9%B6%E7%BB%A7%E7%BB%AD"><span class="nav-number">4.2.</span> <span class="nav-text">2.取消断点并继续</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%B3%A8%E5%85%A5%E4%BB%A3%E7%A0%81"><span class="nav-number">4.3.</span> <span class="nav-text">3.控制台注入代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-FuckIt-amp-Submit"><span class="nav-number">4.4.</span> <span class="nav-text">4.FuckIt &amp; Submit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E8%B6%B3"><span class="nav-number">5.</span> <span class="nav-text">不足</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">halozhy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halozhy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
