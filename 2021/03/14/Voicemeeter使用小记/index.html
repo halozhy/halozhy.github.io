@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="入了一台入门声卡，录音需求已得到极大满足，但之后发现自己还是希望折腾一下声卡的跳线，最终目的是想实现使用声卡和麦克风实现KTV效果。一番搜索之后，发现VoiceMeeter这款软件能够满足需求，只不过配置起来还是有点麻烦……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VoiceMeeter使用小记">
+<meta property="og:url" content="http://example.com/2021/03/14/Voicemeeter%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Halo&#39;s Blog">
+<meta property="og:description" content="入了一台入门声卡，录音需求已得到极大满足，但之后发现自己还是希望折腾一下声卡的跳线，最终目的是想实现使用声卡和麦克风实现KTV效果。一番搜索之后，发现VoiceMeeter这款软件能够满足需求，只不过配置起来还是有点麻烦……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/03/22/18wRsE94rlXDc3S.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/22/ecsTz7SuqgRJodY.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/22/Nel7MzyOp6kiaRA.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/22/elrycEsHjL4KAUn.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/22/1oOTh385uKv2tQy.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/22/JLHXVN7RqGsxyQ6.png">
+<meta property="article:published_time" content="2021-03-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-22T13:48:36.331Z">
+<meta property="article:author" content="halozhy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/22/18wRsE94rlXDc3S.png">
+
+<link rel="canonical" href="http://example.com/2021/03/14/Voicemeeter%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VoiceMeeter使用小记 | Halo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Halo's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fas fa-user-friends fa-fw"></i>友链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+<!--网易云-->   
+<meting-js
+  server="netease"
+  id="593844566"
+  type="playlist" 
+  mini="false"
+  fixed="false"
+  list-folded="true"
+  autoplay="false"
+  volume="0.4"
+  theme="#FADFA3"
+  order="list"
+  loop="all"
+  preload="auto"
+  mutex="true">
+</meting-js>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/14/Voicemeeter%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="halozhy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Halo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VoiceMeeter使用小记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2021-03-14T00:00:00+08:00">2021-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-22 21:48:36" itemprop="dateModified" datetime="2021-03-22T21:48:36+08:00">2021-03-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>入了一台入门声卡，录音需求已得到极大满足，但之后发现自己还是希望折腾一下声卡的跳线，最终目的是想实现使用声卡和麦克风实现KTV效果。一番搜索之后，发现VoiceMeeter这款软件能够满足需求，只不过配置起来还是有点麻烦……</p>
+<a id="more"></a>
+
+<h2 id="什么是-VoiceMeeter"><a href="#什么是-VoiceMeeter" class="headerlink" title="什么是 VoiceMeeter"></a>什么是 VoiceMeeter</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://vb-audio.com/Voicemeeter/">VB-Audio VoiceMeetervb-audio.com › Voicemeeter</a></p>
+<p><em>Voicemeeter</em> is Audio Mixer Application endowed with Virtual Audio Device used as Virtual I/O to mix and manage any audio sources from or to any audio devices or applications. For first use, it’s highly recommended to follow user manual step by step, especially step ZERO of the documentation.</p>
+<p>Voicemeeter是音频混音应用程序，具有虚拟音频设备（用作虚拟I / O），可用于混合和管理来自任何音频设备或应用程序的音频源，以及管理来自任何音频设备或应用程序的任何音频源。 首次使用时，强烈建议您逐步遵循用户手册，尤其是文档的零步骤。</p>
+<p>——Translated by Google</p>
+</blockquote>
+<p>其实可以认为是一个虚拟的混音台，作用大概就是接管硬件输入输出之后，虚拟出几个声卡，在Voicemeeter软件内部可以把输入输出发送到不同的虚拟声卡，供其它的软件使用。</p>
+<p>也有人称之为“音频跳线软件”</p>
+<p>目前有三个版本，无后缀版本，banana，potato，功能逐渐丰富，支持的输入输出通道也逐渐变多。所以网上很多人只推荐用功能最全的potato版。但是potato版本其实需要捐赠之后才能使用的，否则只能试用30天。</p>
+<p>如果你是小白，还是建议你去看一下B站这个视频合辑：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1a4411h7Xe">B站首发电脑音频神器VoiceMeeter详解-从入门到精通+电脑录音直播案例演示</a></p>
+<p>因为这篇博文主要是我自己用来存档思路用的，并不会讲得特别详细了😜</p>
+<h2 id="硬件环境"><a href="#硬件环境" class="headerlink" title="硬件环境"></a>硬件环境</h2><p>声卡：百灵达 UM2</p>
+<p>麦克风：山逊 Q7</p>
+<p>普通笔记本电脑一台</p>
+<p>普通的耳机，扬声器</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><del>老软件工程了</del> </p>
+<p>自己需求其实不是很复杂，但是需要理一理。大概就是希望麦克风的声音经过DAW软件的处理之后，送到扬声器和其它<strong>非专业录音软件</strong>的输入端（如全民K歌），但是DAW软件还是需要录到干声，并且总体<strong>尽量要保证低延迟</strong>（由于入手的入门级声卡并没有硬件ASIO驱动，所以延迟不可完全避免，但是我还是希望延迟低一些）</p>
+<p>搞定这种跳线需求的第一步，还是画图！<del>（又是软件工程）</del></p>
+<p>其实只要画出来音频I/O的路线即可</p>
+<h3 id="最基本的音频-I-O-图"><a href="#最基本的音频-I-O-图" class="headerlink" title="最基本的音频 I/O 图"></a>最基本的音频 I/O 图</h3><p><img src="https://i.loli.net/2021/03/22/18wRsE94rlXDc3S.png" alt="image-20210322194809321.png"></p>
+<h2 id="虚拟声卡分配设计"><a href="#虚拟声卡分配设计" class="headerlink" title="虚拟声卡分配设计"></a>虚拟声卡分配设计</h2><p>接下来，我们需要<strong>给每一类软件分配一个虚拟声卡</strong></p>
+<p>DAW软件，分配为VAIO3 Virtual ASIO (B3)</p>
+<p>全民K歌类软件，分配为AUX VAIO (B2)</p>
+<p>普通播放器，如Chrome这种不支持自定义音频输出的软件，在目前有限的测试中，一般都是走VAIO (B1)</p>
+<h3 id="带分配虚拟声卡的-I-O-图"><a href="#带分配虚拟声卡的-I-O-图" class="headerlink" title="带分配虚拟声卡的 I/O 图"></a>带分配虚拟声卡的 I/O 图</h3><p><img src="https://i.loli.net/2021/03/22/ecsTz7SuqgRJodY.png" alt="image-20210322195155381.png"></p>
+<h2 id="Voicemeeter内部跳线设计"><a href="#Voicemeeter内部跳线设计" class="headerlink" title="Voicemeeter内部跳线设计"></a>Voicemeeter内部跳线设计</h2><p>上图中的B1、B2、B3均为Voicemeeter中提供的虚拟声卡，A1表示硬件输出</p>
+<p>接下来就是在Voicemeeter软件内部配置跳线了，其实如果对Voicemeeter比较熟悉了的话，靠上面的图也许已经可以直接操作了</p>
+<p>不过，为了逐步理解，接下来需要做的就是把上图中的跳线和虚拟声卡对应起来，Voicemeeter内部的跳线示意如下</p>
+<h3 id="内部跳线示意图"><a href="#内部跳线示意图" class="headerlink" title="内部跳线示意图"></a>内部跳线示意图</h3><p><img src="https://i.loli.net/2021/03/22/Nel7MzyOp6kiaRA.png" alt="image-20210322212319317.png"></p>
+<p>完成了这张图的设计之后，也就很容易得到和其它软件连接的示意图了</p>
+<h3 id="和其它软件连接示意图"><a href="#和其它软件连接示意图" class="headerlink" title="和其它软件连接示意图"></a>和其它软件连接示意图</h3><p><img src="https://i.loli.net/2021/03/22/elrycEsHjL4KAUn.png" alt="image-20210322212452864.png"></p>
+<h2 id="最终跳线配置"><a href="#最终跳线配置" class="headerlink" title="最终跳线配置"></a>最终跳线配置</h2><p>完成了跳线的设计，接下来就是按照跳线设计图在Voicemeeter中实现一下即可</p>
+<p><img src="https://i.loli.net/2021/03/22/1oOTh385uKv2tQy.png" alt="image-20210322212749240.png"></p>
+<p>如果想看的更加全面一点的话，下面还有一张内部外部的结合图，我也标注了被跳线的各个音频的类型，不过到了软件外部看着还是有点乱</p>
+<p><img src="https://i.loli.net/2021/03/22/JLHXVN7RqGsxyQ6.png" alt="image-20210322212857684.png"></p>
+<p>另外，为了尽量保证低延迟，Voicemeeter设置的A1硬件输出为WDM类型的硬件，缓冲区大小设置为了512ms，在目前的测试中表现还可以，虽然不能做到和声卡上按下Direct Monitor物理按钮一般的0延迟，但是延迟基本上还是很低的</p>
+<p>还有，不知道为什么，使用AU作为DAW软件的时候，出问题（可能是由于缓冲区太小导致的）的概率会很大，但是使用FL Studio的时候，就基本上不出问题。以后还是多用FL作为使用Voicemeeter时的DAW吧</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/23/%E3%80%8A%E9%87%8D%E5%90%AF%E4%BA%BA%E7%94%9F%E3%80%8B~After%20Reading%20Story/" rel="prev" title="《重启人生》~After Reading Story">
+      <i class="fa fa-chevron-left"></i> 《重启人生》~After Reading Story
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/09/%E6%88%91%E5%92%8C%E3%80%8A%E6%8A%98%E7%BA%B8%E4%BF%A1%E7%AC%BA%E3%80%8B/" rel="next" title="我和《折纸信笺》">
+      我和《折纸信笺》 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-VoiceMeeter"><span class="nav-number">1.</span> <span class="nav-text">什么是 VoiceMeeter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">硬件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E9%9F%B3%E9%A2%91-I-O-%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text">最基本的音频 I&#x2F;O 图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%A3%B0%E5%8D%A1%E5%88%86%E9%85%8D%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.</span> <span class="nav-text">虚拟声卡分配设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E5%88%86%E9%85%8D%E8%99%9A%E6%8B%9F%E5%A3%B0%E5%8D%A1%E7%9A%84-I-O-%E5%9B%BE"><span class="nav-number">4.1.</span> <span class="nav-text">带分配虚拟声卡的 I&#x2F;O 图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Voicemeeter%E5%86%85%E9%83%A8%E8%B7%B3%E7%BA%BF%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">Voicemeeter内部跳线设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E8%B7%B3%E7%BA%BF%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">5.1.</span> <span class="nav-text">内部跳线示意图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C%E5%85%B6%E5%AE%83%E8%BD%AF%E4%BB%B6%E8%BF%9E%E6%8E%A5%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">5.2.</span> <span class="nav-text">和其它软件连接示意图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E8%B7%B3%E7%BA%BF%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">最终跳线配置</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">halozhy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halozhy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
